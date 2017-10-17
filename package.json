@@ -1,0 +1,43 @@
+{
+	"name": "cs-canonical-url",
+	"version": "0.0.1",
+	"description": "transform url strings using a pattern",
+	"private": true,
+	"main": "lib/index.js",
+	"scripts": {
+		"help": "build-scripts help",
+		"scripts": "build-scripts scripts",
+		"resources": "build-scripts resources",
+		"compile": "build-scripts compile",
+		"test": "build-scripts test",
+		"commit": "build-scripts commit",
+		"patch": "build-scripts patch",
+		"push": "build-scripts push",
+		"patch-push": "build-scripts patch-push",
+		"clean": "build-scripts clean",
+		"zip": "build-scripts zip",
+		"package-lambda": "build-scripts package-lambda",
+		"upload-lambda": "build-scripts upload-lambda"
+	},
+	"babel": {
+		"presets": [
+			"env"
+		]
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ControlSpaceSoftware/cs-parse-url.git"
+	},
+	"author": "javadoug",
+	"license": "UNLICENSED",
+	"bugs": {
+		"url": "https://github.com/ControlSpaceSoftware/cs-parse-url/issues"
+	},
+	"homepage": "https://github.com/ControlSpaceSoftware/cs-parse-url#readme",
+	"devDependencies": {
+		"build-scripts": "github:ControlSpaceSoftware/build-scripts"
+	},
+	"dependencies": {
+		"cs-tokenizer": "github:ControlSpaceSoftware/cs-tokenizer"
+	}
+}
