@@ -1,5 +1,5 @@
 {
-	"name": "cs-canonical-url",
+	"name": "cs-format-url",
 	"version": "0.0.1",
 	"description": "transform url strings using a pattern",
 	"private": true,
@@ -9,7 +9,8 @@
 		"scripts": "build-scripts scripts",
 		"resources": "build-scripts resources",
 		"compile": "build-scripts compile",
-		"test": "build-scripts test",
+		"coverage": "nyc --reporter=html --reporter=text ./node_modules/mocha/bin/mocha --compilers js:babel-core/register test",
+		"test": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register test",
 		"commit": "build-scripts commit",
 		"patch": "build-scripts patch",
 		"push": "build-scripts push",
@@ -26,18 +27,21 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/ControlSpaceSoftware/cs-parse-url.git"
+		"url": "git+https://github.com/ControlSpaceSoftware/cs-format-url.git"
 	},
 	"author": "javadoug",
 	"license": "UNLICENSED",
 	"bugs": {
-		"url": "https://github.com/ControlSpaceSoftware/cs-parse-url/issues"
+		"url": "https://github.com/ControlSpaceSoftware/cs-format-url/issues"
 	},
-	"homepage": "https://github.com/ControlSpaceSoftware/cs-parse-url#readme",
+	"homepage": "https://github.com/ControlSpaceSoftware/cs-format-url#readme",
 	"devDependencies": {
-		"build-scripts": "github:ControlSpaceSoftware/build-scripts"
+		"build-scripts": "github:ControlSpaceSoftware/build-scripts",
+		"mocha": "^4.0.1",
+		"nyc": "^11.2.1"
 	},
 	"dependencies": {
-		"cs-tokenizer": "github:ControlSpaceSoftware/cs-tokenizer"
+		"cs-tokenizer": "github:ControlSpaceSoftware/cs-tokenizer",
+		"lodash.contains": "^2.4.3"
 	}
 }
