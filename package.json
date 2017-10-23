@@ -10,7 +10,7 @@
 		"resources": "build-scripts resources",
 		"compile": "build-scripts compile",
 		"coverage": "nyc --reporter=html --reporter=text ./node_modules/mocha/bin/mocha --compilers js:babel-core/register test",
-		"test": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register test",
+		"test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register test",
 		"commit": "build-scripts commit",
 		"patch": "build-scripts patch",
 		"push": "build-scripts push",
