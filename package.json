@@ -1,7 +1,7 @@
 {
 	"name": "cs-format-url",
 	"version": "0.0.2",
-	"description": "transform url strings using a pattern",
+	"description": "format url strings using a simple pattern",
 	"private": true,
 	"main": "lib/index.js",
 	"scripts": {

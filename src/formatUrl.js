@@ -40,7 +40,7 @@ function isQueryStringRule(rule) {
 	// query rules
 	switch (rule.type) {
 		case 'query-string-sep':
-		case 'match-query-param':
+		case 'include-query-param':
 		case 'omit-query-string':
 		case 'exclude-all-params-except-following':
 		case 'include-all-params-except-following':
@@ -94,7 +94,7 @@ function initRules(allRules, url) {
 	const includeQuery = (token) => contains(query, token.paramName);
 
 	const queryStringSepRule = {type: 'query-string-sep', include: () => query.length > 0};
-	const queryParamRule = {type: 'match-query-param', include: includeQuery};
+	const queryParamRule = {type: 'include-query-param', include: includeQuery};
 
 	let insertQueryStringRules = true;
 
@@ -210,9 +210,8 @@ export function formatUrl(urlString, patternString = '') {
 					break;
 
 				case 'omit-path':
-					if (!isPathToken(nextToken)) {
-						ruleIndex++;
-					}
+					ruleIndex++;
+					state.ignoreRemainingPath = true;
 					break;
 
 				case 'glob':
@@ -284,13 +283,13 @@ export function formatUrl(urlString, patternString = '') {
 					}
 					break;
 
-				case 'match-query-param':
+				case 'include-query-param':
 					if (!nextToken.type.startsWith('query-')) {
 						ruleIndex++;
 					}
 					if (rule.include(token)) {
 						if (map.tokens[map.tokens.length - 1].type === 'query-param') {
-							map.tokens.push({type: 'query-param-sep', value: '&'});
+							map.tokens.push(urlTokenizer.ParamSep);
 						}
 						map.tokens.push(token);
 					}
