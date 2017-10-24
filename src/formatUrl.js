@@ -14,17 +14,7 @@ function isEnd(t) {
 	return t.type === 'end';
 }
 
-function isPathToken(token) {
-	switch (token.type) {
-		case 'path-segment':
-		case 'path-sep':
-			return true;
-	}
-	return false;
-}
-
 function isPathRule(rule) {
-	// path rules
 	switch (rule.type) {
 		case 'glob':
 		case 'omit-path':
@@ -37,7 +27,6 @@ function isPathRule(rule) {
 }
 
 function isQueryStringRule(rule) {
-	// query rules
 	switch (rule.type) {
 		case 'query-string-sep':
 		case 'include-query-param':
@@ -51,7 +40,6 @@ function isQueryStringRule(rule) {
 }
 
 function isFragmentRule(rule) {
-	// fragment rules
 	switch (rule.type) {
 		case 'match-fragment':
 		case 'omit-fragment':
@@ -204,10 +192,6 @@ export function formatUrl(urlString, patternString = '') {
 			}
 
 			switch (rule.type) {
-
-				case 'end':
-					map.tokens.push(token);
-					break;
 
 				case 'omit-path':
 					ruleIndex++;
