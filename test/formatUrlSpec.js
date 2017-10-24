@@ -5,7 +5,7 @@ import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 import * as Url from 'url'
 
-import {formatUrl} from '../src/formatUrl'
+import formatUrl from '../src/index'
 
 import {COMMON_URLS} from './test-urls'
 
