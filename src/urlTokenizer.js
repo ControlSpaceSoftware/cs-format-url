@@ -47,10 +47,14 @@ export function reducer(char, state, i, chars) {
 	if (state.skip) {
 		state.skip--;
 		return false;
-	} else if (state.escapeNext === true) {
+	}
+
+	if (state.escapeNext === true) {
 		state.escapeNext = false;
-		return; // collect in the literal array
-	} else if (!(state.hasScheme || state.hasPath || state.inQueryString || state.inFragment)) {
+		return;
+	}
+
+	if (!(state.hasScheme || state.hasPath || state.inQueryString || state.inFragment)) {
 		if (char === ':' && chars[i + 1] === '/' && chars[i + 2] === '/') {
 			result.push(tokens.Scheme(state.literal.join('')));
 			result.push(tokens.SchemeSep);
@@ -163,7 +167,9 @@ function tokenizerFunction(text) {
 
 	const tokens = tokenizer.tokenize(text);
 
-	const sortedParams = tokens.filter((t) => t.type === 'query-param')
+	const isQueryParamToken = (token) => token.type === 'query-param';
+
+	const sortedParams = tokens.filter(isQueryParamToken)
 		.sort((a, b) => {
 			if (a.paramName > b.paramName) {
 				return 1;
@@ -183,7 +189,7 @@ function tokenizerFunction(text) {
 	let tokenPos = 0;
 
 	return tokens.map((t) => {
-		if (t.type === 'query-param') {
+		if (isQueryParamToken(t)) {
 			return sortedParams[tokenPos++]
 		}
 		return t;

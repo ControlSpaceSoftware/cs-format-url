@@ -47,10 +47,12 @@ export function reducer(char, state, i, chars) {
 		state.skip--;
 		return false;
 	}
+
 	if (state.escapeNext === true) {
 		state.escapeNext = false;
-		return; // collect in the literal array
+		return;
 	}
+
 	if (!state.isPathDone) {
 		switch (char) {
 			case '*':
@@ -161,7 +163,7 @@ export function reducer(char, state, i, chars) {
 				return false;
 			}
 			if (!(typeof chars[i - 1] === 'undefined' || chars[i - 1] === '/' || chars[i - 1] === '?' || chars[i - 1] === '#')) {
-				throw new TypeError(`'-' can only appear at beginning or after a '/' or '?' or '#'. try escaping the like \\\\-`)
+				throw new TypeError(`'-' can only appear at beginning or after a '/' or '?' or '#'. try escaping like \\\\-`)
 			}
 			if (i === 0 && chars[i + 1] === 'end') {
 				return tokens.OmitPath;
@@ -198,7 +200,9 @@ function tokenizerFunction(text) {
 
 	const tokens = tokenizer.tokenize(text);
 
-	const sortedParams = tokens.filter((t) => t.type === 'param')
+	const isParamToken = (token) => token.type === 'param';
+
+	const sortedParams = tokens.filter(isParamToken)
 		.sort((a, b) => {
 			if (a.value > b.value) {
 				return 1;
@@ -212,7 +216,7 @@ function tokenizerFunction(text) {
 	let tokenPos = 0;
 
 	return tokens.map((t) => {
-		if (t.type === 'param') {
+		if (isParamToken(t)) {
 			return sortedParams[tokenPos++]
 		}
 		return t;
