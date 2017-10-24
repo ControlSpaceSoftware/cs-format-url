@@ -42,6 +42,6 @@
 	},
 	"dependencies": {
 		"cs-tokenizer": "github:ControlSpaceSoftware/cs-tokenizer",
-		"lodash.contains": "^2.4.3"
+		"lodash.includes": "^4.3.0"
 	}
 }

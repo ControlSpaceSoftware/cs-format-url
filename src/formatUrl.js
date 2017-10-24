@@ -1,6 +1,6 @@
 import {patternTokenizer} from "./patternTokenizer";
 import {urlTokenizer} from "./urlTokenizer";
-import contains from 'lodash.contains';
+import includes from 'lodash.includes';
 
 function getPatternTokens(pattern) {
 	try {
@@ -63,10 +63,10 @@ function initRules(allRules, url) {
 			return result;
 		}
 		if (rule.type === 'exclude-all-params-except-following') {
-			return (name) => contains(params, name);
+			return (name) => includes(params, name);
 		}
 		if (rule.type === 'include-all-params-except-following') {
-			return (name) => !contains(params, name);
+			return (name) => !includes(params, name);
 		}
 		if (rule.type === 'omit-query-string') {
 			return () => false;
@@ -79,7 +79,7 @@ function initRules(allRules, url) {
 
 	const query = url.filter((t) => t.type === 'query-param').filter((t) => paramInclude(t.paramName)).map((t) => t.paramName);
 
-	const includeQuery = (token) => contains(query, token.paramName);
+	const includeQuery = (token) => includes(query, token.paramName);
 
 	const queryStringSepRule = {type: 'query-string-sep', include: () => query.length > 0};
 	const queryParamRule = {type: 'include-query-param', include: includeQuery};
