@@ -2,6 +2,26 @@ import {patternTokenizer} from "./patternTokenizer";
 import {urlTokenizer} from "./urlTokenizer";
 import includes from 'lodash.includes';
 
+export const formatUrl = (urlString, patternString) => {
+
+	try {
+		return formatUrlImpl(urlString, patternString);
+	} catch (error1) {
+		try {
+			console.error(error1);
+			console.error(patternString);
+			console.error(urlString);
+			return formatUrlImpl(urlString);
+		} catch (error2) {
+			console.error(error2);
+			console.error('retry with no pattern');
+			console.error(urlString);
+			return urlString;
+		}
+	}
+
+};
+
 function getPatternTokens(pattern) {
 	try {
 		return patternTokenizer(pattern);
@@ -113,7 +133,7 @@ function initRules(allRules, url) {
 
 }
 
-export function formatUrl(urlString, patternString = '') {
+function formatUrlImpl(urlString, patternString = '') {
 
 	let ruleIndex = 0;
 
@@ -338,3 +358,4 @@ export function formatUrl(urlString, patternString = '') {
 	return result.tokens.map((t) => t.value).join('');
 
 }
+
