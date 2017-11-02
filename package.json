@@ -37,6 +37,7 @@
 	"homepage": "https://github.com/ControlSpaceSoftware/cs-format-url#readme",
 	"devDependencies": {
 		"build-scripts": "github:ControlSpaceSoftware/build-scripts",
+		"chai-spies": "^0.7.1",
 		"mocha": "^4.0.1",
 		"nyc": "^11.2.1"
 	},

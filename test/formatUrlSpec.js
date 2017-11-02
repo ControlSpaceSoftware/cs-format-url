@@ -3,6 +3,8 @@
 import chai from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
+import spies from 'chai-spies'
+
 import * as Url from 'url'
 
 import formatUrl from '../src/index'
@@ -10,6 +12,7 @@ import formatUrl from '../src/index'
 import {COMMON_URLS} from './test-urls'
 
 chai.should();
+chai.use(spies);
 chai.use(sinonChai);
 
 const expect = chai.expect;
@@ -801,6 +804,15 @@ describe('formatUrl', () => {
 			url = 'https://console.aws.amazon.com/console/home?#';
 			expected = 'https://console.aws.amazon.com/console/home';
 			expect(formatUrl(url)).to.eql(expected);
+		});
+
+		it('https://trello.com/', () => {
+			url = 'https://trello.com/';
+			pattern = '/*/*/';
+			expected = 'https://trello.com/';
+			const result = formatUrl(url, pattern);
+			// expect(console.log).not.calledWith('pattern failed to format url');
+			expect(result).to.eql(expected)
 		});
 
 	});

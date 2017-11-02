@@ -8,14 +8,10 @@ export const formatUrl = (urlString, patternString) => {
 		return formatUrlImpl(urlString, patternString);
 	} catch (error1) {
 		try {
-			console.error(error1);
-			console.error(patternString);
-			console.error(urlString);
+			console.error(error1, patternString, urlString);
 			return formatUrlImpl(urlString);
 		} catch (error2) {
-			console.error(error2);
-			console.error('retry with no pattern');
-			console.error(urlString);
+			console.error(error1, patternString, urlString);
 			return urlString;
 		}
 	}
@@ -225,7 +221,7 @@ function formatUrlImpl(urlString, patternString = '') {
 						state.includeRemainingURL = true;
 					} else if (isQueryStringRule(nextRule) || isFragmentRule(nextRule)) {
 						ruleIndex++;
-					} else if (nextRule.type === 'path-sep' && (nextToken.type === 'path-sep' || nextToken.type === 'end')) {
+					} else if (nextRule.type === 'path-sep' && (nextToken && (nextToken.type === 'path-sep' || nextToken.type === 'end'))) {
 						ruleIndex++;
 					}
 					break;
