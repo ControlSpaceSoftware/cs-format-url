@@ -39,7 +39,7 @@
 		"build-scripts": "github:ControlSpaceSoftware/build-scripts",
 		"chai-spies": "^0.7.1",
 		"mocha": "^4.0.1",
-		"nyc": "^11.2.1"
+		"nyc": "^11.4.0"
 	},
 	"dependencies": {
 		"cs-tokenizer": "github:ControlSpaceSoftware/cs-tokenizer",
